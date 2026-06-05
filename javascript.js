@@ -11,14 +11,14 @@ function Gameboard() {
     }
 
     const getBoard = () => board;
-    console.log(board);
 
 
     function Cell() {
         let value = 0;
         return value;
     }
-
+    console.log(board)
+    return board;
 }
 
 
@@ -30,10 +30,28 @@ function players() {
 
     const player1 = newPlayer("jim", "X");
     const player2 = newPlayer("jill", "O");
-}
+    return [player1, player2]
+};
 
 function gameflow() {
+
+
+     const player1Marker = players()[0].marker;
+     const player2Marker = players()[1].marker;
+      
+    function markCell (row,column,player) {
+      const player1Marker = players()[0].marker;
+      const player2Marker = players()[1].marker;
+      let playerMarker;
+      if (player === 1){playerMarker = player1Marker}
+      else if(player === 2){playerMarker = player2Marker}
+      
+      let cellValue = playerMarker;
+      Gameboard()[row][column] = cellValue;
     
+    }
+    markCell(0,2,2)
+
 };
 
 
@@ -41,5 +59,3 @@ function gameflow() {
 
 players();
 gameflow();
-Gameboard();
-
