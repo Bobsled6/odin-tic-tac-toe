@@ -34,12 +34,11 @@ function players() {
 };
 
 function gameflow() {
-
-
      const player1Marker = players()[0].marker;
      const player2Marker = players()[1].marker;
      let currentBoard = Gameboard();
      let mergedBoardArray = [];
+     const boardSpace = document.querySelectorAll(".cell");
 
 
     function turnCheck() {
@@ -71,6 +70,7 @@ function gameflow() {
         console.log(currentBoard)
         return currentBoard;
     }
+    
     function winCheck() {
         let board = currentBoard;
     if(
@@ -86,6 +86,13 @@ function gameflow() {
                 else{console.log("Player 2 Wins")}
             }
         } 
+
+for(let i = 0; i < boardSpace.length; i++) {
+    boardSpace[i].addEventListener( 'click', () => console.log("test"))
+}
+       
 }
 players();
 gameflow();
+
+    
