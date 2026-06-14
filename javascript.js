@@ -40,22 +40,34 @@ function gameflow() {
      const player2Marker = players()[1].marker;
      let currentBoard = Gameboard();
       
-    function markCell (row,column,player) {
+    function markCell (row,column) {
       
-      const player1Marker = players()[0].marker;
-      const player2Marker = players()[1].marker;
-      let playerMarker;
+        const player1Marker = players()[0].marker;
+        const player2Marker = players()[1].marker;
+        let playerTurn = 0;
+        let mergedBoardArray = currentBoard[0].concat(currentBoard[1],currentBoard[2]);
+        
+        function filterUnmarked(cell) {
+            return cell === 0;
+        };
 
-      if (player === 1){playerMarker = player1Marker}
-      else if(player === 2){playerMarker = player2Marker}
-      else (console.log("Error, no player selected"))
-      currentBoard[row][column] = playerMarker;
-      return currentBoard;
-    }
-    let unmarkedCells = 0;
-    
-    function filterUnmarked(cell) {
-        return !(cell === 0)
+        function turnCheck() {
+            let filteredArray = mergedBoardArray.filter(filterUnmarked);
+             if (filteredArray.length % 2 === 0) {
+                return playerTurn = 2;
+        }    else {
+                return playerTurn = 1;
+        };}
+
+        turnCheck();
+
+        if (playerTurn === 1) {
+            currentBoard[row][column] = player1Marker
+        }
+        else if(playerTurn = 2) {
+            currentBoard[row][column] = player2Marker;
+        }
+        return currentBoard;
     }
 
     function winCheck() {
@@ -73,18 +85,8 @@ function gameflow() {
         }
 
     }
-
-winCheck();
-    
-    const filteredBoard = currentBoard.filter(filterUnmarked);
-    if (filteredBoard.length === 0) {
-        console.log("tie")
-    }
-};
-
-
-
+    winCheck();
+    console.log(currentBoard);
+}
 players();
 gameflow();
-
-
