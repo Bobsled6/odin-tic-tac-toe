@@ -39,37 +39,38 @@ function gameflow() {
      const player1Marker = players()[0].marker;
      const player2Marker = players()[1].marker;
      let currentBoard = Gameboard();
+     let mergedBoardArray = [];
+
+
+    function turnCheck() {
+        
+        function filterMarked(cell) {
+            return cell === 0;
+        };
+        let mergedBoardArray = currentBoard[0].concat(currentBoard[1],currentBoard[2]);
+        let filteredArray = mergedBoardArray.filter(filterMarked);
+        if (filteredArray.length % 2 === 0) {
+            return playerTurn = 2}
+        else {
+            return playerTurn = 1}
+    
+    };
       
     function markCell (row,column) {
       
         const player1Marker = players()[0].marker;
         const player2Marker = players()[1].marker;
-        let playerTurn = 0;
-        let mergedBoardArray = currentBoard[0].concat(currentBoard[1],currentBoard[2]);
-        
-        function filterUnmarked(cell) {
-            return cell === 0;
-        };
-
-        function turnCheck() {
-            let filteredArray = mergedBoardArray.filter(filterUnmarked);
-             if (filteredArray.length % 2 === 0) {
-                return playerTurn = 2;
-        }    else {
-                return playerTurn = 1;
-        };}
-
         turnCheck();
-
         if (playerTurn === 1) {
-            currentBoard[row][column] = player1Marker
+            currentBoard[row][column] = player1Marker;
         }
-        else if(playerTurn = 2) {
+        else if(playerTurn === 2) {
             currentBoard[row][column] = player2Marker;
         }
+        winCheck();
+        console.log(currentBoard)
         return currentBoard;
     }
-
     function winCheck() {
         let board = currentBoard;
     if(
@@ -81,12 +82,10 @@ function gameflow() {
     ||  (board[0][2] === board[1][2] && board[0][2] === board[2][2] && !(board[0][2] === 0))
     ||  (board[0][0] === board[1][1] && board[0][0] === board[2][2] && !(board[0][0] === 0))
     ||  (board[0][2] === board[1][1] && board[0][2] === board[2][0] && !(board[0][2] === 0))) {
-            console.log("success")
-        }
-
-    }
-    winCheck();
-    console.log(currentBoard);
+            if (playerTurn === 1) {console.log("Player 1 Wins")}
+                else{console.log("Player 2 Wins")}
+            }
+        } 
 }
 players();
 gameflow();
