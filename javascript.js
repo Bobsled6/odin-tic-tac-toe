@@ -88,11 +88,27 @@ function gameflow() {
         } 
 
 for(let i = 0; i < boardSpace.length; i++) {
-    boardSpace[i].addEventListener( 'click', () => console.log("test"))
+    let number = i;
+    idCell(number);
+    boardSpace[i].addEventListener('click', () =>  {markCell(idCell(number).row ,idCell(number).column)
+    })
+    
 }
-       
+
+function idCell(i) {
+    if (i <= 2) {
+        const cellIdentifier = {row: "0" , column: i};  console.log(cellIdentifier); return cellIdentifier}
+    else if (i <= 5) {
+       const cellIdentifier = {row: "1" , column: i - 3}; console.log(cellIdentifier); return cellIdentifier}
+    else if(i <= 8) {
+        const cellIdentifier = {row: "2" , column: i - 6}; console.log(cellIdentifier); return cellIdentifier}
 }
+
+
+
+}
+
+
+
 players();
 gameflow();
-
-    
