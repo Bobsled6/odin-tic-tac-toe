@@ -82,15 +82,16 @@ function gameflow() {
     ||  (board[0][2] === board[1][2] && board[0][2] === board[2][2] && !(board[0][2] === 0))
     ||  (board[0][0] === board[1][1] && board[0][0] === board[2][2] && !(board[0][0] === 0))
     ||  (board[0][2] === board[1][1] && board[0][2] === board[2][0] && !(board[0][2] === 0))) {
-            if (playerTurn === 1) {console.log("Player 1 Wins")}
-                else{console.log("Player 2 Wins")}
+            if (playerTurn === 1) {alert("Player 1 Wins"), clearBoard()}
+                else{alert("Player 2 Wins"), clearBoard()}
+            
             }
         } 
 
 for(let i = 0; i < boardSpace.length; i++) {
     let number = i;
     idCell(number);
-    boardSpace[i].addEventListener('click', () =>  { if (boardSpace[i].innerHTML === "") {
+    boardSpace[i].addEventListener('click', () =>  {if (boardSpace[i].innerHTML === "") {
         if(turnCheck() === 1) {
            boardSpace[i].innerHTML = "X";
         } else if (turnCheck() === 2)
@@ -109,6 +110,12 @@ function idCell(i) {
         const cellIdentifier = {row: "2" , column: i - 6}; console.log(cellIdentifier); return cellIdentifier}
 }
 
+function clearBoard() {
+    for(let i = 0; i < boardSpace.length; i++) {
+        boardSpace[i].innerHTML = "";
+    }
+    return currentBoard = Gameboard();
+}
 
 
 }
