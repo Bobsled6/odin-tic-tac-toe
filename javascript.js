@@ -90,13 +90,13 @@ function gameflow() {
 for(let i = 0; i < boardSpace.length; i++) {
     let number = i;
     idCell(number);
-    boardSpace[i].addEventListener('click', () =>  { 
+    boardSpace[i].addEventListener('click', () =>  { if (boardSpace[i].innerHTML === "") {
         if(turnCheck() === 1) {
            boardSpace[i].innerHTML = "X";
         } else if (turnCheck() === 2)
             boardSpace[i].innerHTML = "O";
-        markCell(idCell(number).row , idCell(number).column)
-    })
+        markCell(idCell(number).row , idCell(number).column);
+}})
     
 }
 
