@@ -67,7 +67,7 @@ function gameflow() {
             currentBoard[row][column] = player2Marker;
         }
         winCheck();
-        console.log(currentBoard)
+        console.log(currentBoard);
         return currentBoard;
     }
     
@@ -90,7 +90,12 @@ function gameflow() {
 for(let i = 0; i < boardSpace.length; i++) {
     let number = i;
     idCell(number);
-    boardSpace[i].addEventListener('click', () =>  {markCell(idCell(number).row ,idCell(number).column)
+    boardSpace[i].addEventListener('click', () =>  { 
+        if(turnCheck() === 1) {
+           boardSpace[i].innerHTML = "X";
+        } else if (turnCheck() === 2)
+            boardSpace[i].innerHTML = "O";
+        markCell(idCell(number).row , idCell(number).column)
     })
     
 }
