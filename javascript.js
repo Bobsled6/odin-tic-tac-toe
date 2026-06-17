@@ -39,6 +39,7 @@ function gameflow() {
      let currentBoard = Gameboard();
      let mergedBoardArray = [];
      const boardSpace = document.querySelectorAll(".cell");
+     const restartButton = document.getElementById("restartButton");
      addClickEvents();
 
 
@@ -91,15 +92,20 @@ function gameflow() {
             }
         } 
 
-function addClickEvents() {for(let i = 0; i < boardSpace.length; i++) {
-    let number = i;
-    idCell(number);
-    boardSpace[i].addEventListener('click', () =>  {if (boardSpace[i].innerHTML === "") {
-        if(turnCheck() === 1) {
-           boardSpace[i].innerHTML = "X";
-        } else if (turnCheck() === 2)
-            boardSpace[i].innerHTML = "O";
-        markCell(idCell(number).row , idCell(number).column);
+function addClickEvents() {
+    restartButton.addEventListener('click', () => {
+        clearBoard();
+    })
+    for(let i = 0; i < boardSpace.length; i++) {
+        let number = i;
+        idCell(number);
+        boardSpace[i].addEventListener('click', () =>  {
+            if (boardSpace[i].innerHTML === "") {
+                if(turnCheck() === 1) {
+                    boardSpace[i].innerHTML = "X"}
+                else if (turnCheck() === 2){
+                    boardSpace[i].innerHTML = "O"}
+            markCell(idCell(number).row , idCell(number).column);
 }})}}
 
 function idCell(i) {
