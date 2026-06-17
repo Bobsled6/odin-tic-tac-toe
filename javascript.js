@@ -39,16 +39,18 @@ function gameflow() {
      let currentBoard = Gameboard();
      let mergedBoardArray = [];
      const boardSpace = document.querySelectorAll(".cell");
+     addClickEvents();
 
 
     function turnCheck() {
-        
         function filterMarked(cell) {
             return cell === 0;
         };
         let mergedBoardArray = currentBoard[0].concat(currentBoard[1],currentBoard[2]);
         let filteredArray = mergedBoardArray.filter(filterMarked);
-        if (filteredArray.length % 2 === 0) {
+        if (filteredArray.length === 0) {
+            return alert("tie")}
+        else if (filteredArray.length % 2 === 0) {
             return playerTurn = 2}
         else {
             return playerTurn = 1}
@@ -67,6 +69,7 @@ function gameflow() {
             currentBoard[row][column] = player2Marker;
         }
         winCheck();
+        turnCheck();
         console.log(currentBoard);
         return currentBoard;
     }
@@ -88,7 +91,7 @@ function gameflow() {
             }
         } 
 
-for(let i = 0; i < boardSpace.length; i++) {
+function addClickEvents() {for(let i = 0; i < boardSpace.length; i++) {
     let number = i;
     idCell(number);
     boardSpace[i].addEventListener('click', () =>  {if (boardSpace[i].innerHTML === "") {
@@ -97,17 +100,15 @@ for(let i = 0; i < boardSpace.length; i++) {
         } else if (turnCheck() === 2)
             boardSpace[i].innerHTML = "O";
         markCell(idCell(number).row , idCell(number).column);
-}})
-    
-}
+}})}}
 
 function idCell(i) {
     if (i <= 2) {
-        const cellIdentifier = {row: "0" , column: i};  console.log(cellIdentifier); return cellIdentifier}
+        const cellIdentifier = {row: "0" , column: i}; return cellIdentifier}
     else if (i <= 5) {
-       const cellIdentifier = {row: "1" , column: i - 3}; console.log(cellIdentifier); return cellIdentifier}
+       const cellIdentifier = {row: "1" , column: i - 3}; return cellIdentifier}
     else if(i <= 8) {
-        const cellIdentifier = {row: "2" , column: i - 6}; console.log(cellIdentifier); return cellIdentifier}
+        const cellIdentifier = {row: "2" , column: i - 6}; return cellIdentifier}
 }
 
 function clearBoard() {
