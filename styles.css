@@ -41,3 +41,25 @@ body {
     background-color: rgb(255, 255, 255);
     border-radius: 12px;
 }
+
+.playerNameDiv {
+    font-style: italic;
+    min-width: 100px;
+    width: fit-content;
+    background-color: white;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 4px;
+}
+
+.pencilIcon {
+    width: 16px;
+    height: 16px;
+    padding-left: 10px;
+}
+
+.playerNameBox {
+   display: flex;
+}
