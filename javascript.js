@@ -45,15 +45,14 @@ function gameflow() {
      addClickEvents();
 
 
-    function turnCheck() {
-        function filterMarked(cell) {
+    function filterMarked(cell) {
             return cell === 0;
         };
+    
+    function turnCheck() {
         let mergedBoardArray = currentBoard[0].concat(currentBoard[1],currentBoard[2]);
         let filteredArray = mergedBoardArray.filter(filterMarked);
-        if (filteredArray.length === 0) {
-            return alert("tie")}
-        else if (filteredArray.length % 2 === 0) {
+        if (filteredArray.length % 2 === 0) {
             return playerTurn = 2}
         else {
             return playerTurn = 1}
@@ -79,6 +78,8 @@ function gameflow() {
     
     function winCheck() {
         let board = currentBoard;
+        let mergedBoardArray = currentBoard[0].concat(currentBoard[1],currentBoard[2]);
+        let filteredArray = mergedBoardArray.filter(filterMarked);
     if(
         (board[0][0] === board[0][1] && board[0][0] === board[0][2] && !(board[0][0] === 0))
     ||  (board[1][0] === board[1][1] && board[1][0] === board[1][2] && !(board[1][0] === 0))
@@ -92,6 +93,9 @@ function gameflow() {
                 else{winAlert.innerHTML = "Player 2 Wins", controller.abort()}
             
             }
+    else if (filteredArray.length === 0) {
+        winAlert.innerHTML = "Tie";
+    }
         } 
 
     function addClickEvents() {
