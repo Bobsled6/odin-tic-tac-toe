@@ -24,6 +24,12 @@ body {
     border: 1px solid black;
 }
 
+#winAlert {
+    font-size: 150px;
+    min-height: 200px;
+    justify-self: center;
+}
+
 .cell {
     border:1px solid black;
     font-size: 100px;
@@ -42,7 +48,7 @@ body {
     border-radius: 12px;
 }
 
-.playerNameDiv {
+.playerNameDivas {
     font-style: italic;
     min-width: 100px;
     width: fit-content;
@@ -61,5 +67,13 @@ body {
 }
 
 .playerNameBox {
-   display: flex;
+   font-style: italic;
+    min-width: 100px;
+    width: fit-content;
+    background-color: white;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 4px;
 }

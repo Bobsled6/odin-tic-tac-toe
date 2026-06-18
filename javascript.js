@@ -40,6 +40,8 @@ function gameflow() {
      let mergedBoardArray = [];
      const boardSpace = document.querySelectorAll(".cell");
      const restartButton = document.getElementById("restartButton");
+     const winAlert = document.getElementById("winAlert");
+     let controller = new AbortController();
      addClickEvents();
 
 
@@ -86,43 +88,49 @@ function gameflow() {
     ||  (board[0][2] === board[1][2] && board[0][2] === board[2][2] && !(board[0][2] === 0))
     ||  (board[0][0] === board[1][1] && board[0][0] === board[2][2] && !(board[0][0] === 0))
     ||  (board[0][2] === board[1][1] && board[0][2] === board[2][0] && !(board[0][2] === 0))) {
-            if (playerTurn === 1) {alert("Player 1 Wins"), clearBoard()}
-                else{alert("Player 2 Wins"), clearBoard()}
+            if (playerTurn === 1) {winAlert.innerHTML = "Player 1 Wins", controller.abort()}
+                else{winAlert.innerHTML = "Player 2 Wins", controller.abort()}
             
             }
         } 
 
-function addClickEvents() {
-    restartButton.addEventListener('click', () => {
-        clearBoard();
-    })
-    for(let i = 0; i < boardSpace.length; i++) {
-        let number = i;
-        idCell(number);
-        boardSpace[i].addEventListener('click', () =>  {
-            if (boardSpace[i].innerHTML === "") {
-                if(turnCheck() === 1) {
-                    boardSpace[i].innerHTML = "X"}
-                else if (turnCheck() === 2){
-                    boardSpace[i].innerHTML = "O"}
-            markCell(idCell(number).row , idCell(number).column);
-}})}}
+    function addClickEvents() {
+        restartButton.addEventListener('click', () => {
+            clearBoard();
+            controller = new AbortController;
+            boardClickEvents();
+            winAlert.innerHTML = "";
+        })
 
-function idCell(i) {
-    if (i <= 2) {
-        const cellIdentifier = {row: "0" , column: i}; return cellIdentifier}
-    else if (i <= 5) {
-       const cellIdentifier = {row: "1" , column: i - 3}; return cellIdentifier}
-    else if(i <= 8) {
-        const cellIdentifier = {row: "2" , column: i - 6}; return cellIdentifier}
-}
+        boardClickEvents();
 
-function clearBoard() {
-    for(let i = 0; i < boardSpace.length; i++) {
-        boardSpace[i].innerHTML = "";
+        function boardClickEvents () {for(let i = 0; i < boardSpace.length; i++) {
+            let number = i;
+            idCell(number);
+            boardSpace[i].addEventListener('click', () => {
+                if (boardSpace[i].innerHTML === "") {
+                    if(turnCheck() === 1) {
+                        boardSpace[i].innerHTML = "X"}
+                    else if (turnCheck() === 2){
+                        boardSpace[i].innerHTML = "O"}
+                markCell(idCell(number).row , idCell(number).column);
+            }}, {signal: controller.signal})}}}
+
+    function idCell(i) {
+        if (i <= 2) {
+            const cellIdentifier = {row: "0" , column: i}; return cellIdentifier}
+        else if (i <= 5) {
+        const cellIdentifier = {row: "1" , column: i - 3}; return cellIdentifier}
+        else if(i <= 8) {
+            const cellIdentifier = {row: "2" , column: i - 6}; return cellIdentifier}
     }
-    return currentBoard = Gameboard();
-}
+
+    function clearBoard() {
+        for(let i = 0; i < boardSpace.length; i++) {
+            boardSpace[i].innerHTML = "";
+        }
+        return currentBoard = Gameboard();
+    }
 
 
 }
