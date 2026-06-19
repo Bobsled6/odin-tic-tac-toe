@@ -129,7 +129,7 @@ function gameflow() {
             
             }
     else if (filteredArray.length === 0) {
-        winAlert.innerHTML = "Tie", controller.abort();
+        winnerName.innerHTML = "Tie", controller.abort();
     }
         } 
 
