@@ -124,8 +124,8 @@ function gameflow() {
     ||  (board[0][2] === board[1][2] && board[0][2] === board[2][2] && !(board[0][2] === 0))
     ||  (board[0][0] === board[1][1] && board[0][0] === board[2][2] && !(board[0][0] === 0))
     ||  (board[0][2] === board[1][1] && board[0][2] === board[2][0] && !(board[0][2] === 0))) {
-            if (playerTurn === 1) {winAlert.innerHTML = playerOneCurrentName + " (" + players()[0].marker + ")" + " Wins", controller.abort()}
-                else{winAlert.innerHTML = playerTwoCurrentName + " (" + players()[1].marker + ")" + " Wins", controller.abort()}
+            if (playerTurn === 1) {winner.innerHTML = "Winner!", winnerName.innerHTML = playerOneCurrentName + " (" + players()[0].marker + ")", controller.abort()}
+                else{winner.innerHTML = "Winner!", winnerName.innerHTML = playerTwoCurrentName + " (" + players()[1].marker + ")", controller.abort()}
             
             }
     else if (filteredArray.length === 0) {
@@ -139,7 +139,8 @@ function gameflow() {
             clearBoard();
             controller = new AbortController();
             boardClickEvents();
-            winAlert.innerHTML = "";
+            winner.innerHTML = "";
+            winnerName.innerHTML = "";
         })
 
         boardClickEvents();

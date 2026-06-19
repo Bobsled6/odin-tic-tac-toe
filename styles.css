@@ -3,35 +3,42 @@ body, main {
     width: 100dvw;
     padding: 0px;
     margin: 0px;
-    background-color: rgb(191, 191, 191);
+    background-color: rgb(1, 110, 66);
     font-family: Roboto Arial, Helvetica, sans-serif;
 }
 
 body {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 3fr 1fr;
     grid-template-rows: 1fr, 4fr, 1fr;
 }
 
 #gameboard {
-    grid-area: 2 / 1 / 3 / 1;
+    grid-area: 2 / 2 / 3 / 3;
+    margin: 1px;
+    outline: 1px solid  rgb(1, 110, 66);
     justify-self: center;
     width: 600px;
     height: 600px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3 , 1fr);
-    border: 1px solid black;
 }
 
 #winAlert {
-    font-size: 150px;
+    grid-area: 1 / 2 / 1 / 3;
+    display: inline-block;
+    width: 100%;
     min-height: 200px;
     justify-self: center;
+    background-color: white;
+    font-size: 4.2vw;
+    justify-items: center;
 }
 
 .cell {
-    border:1px solid black;
+    outline:1px solid black;
+    border-radius: inherit;
     font-size: 100px;
     display: flex;
     justify-content: center;
@@ -40,7 +47,7 @@ body {
 
 
 #restartButton {
-    grid-area: 3 / 1 / 4 / 1;
+    grid-area: 3 / 2 / 4 / 3;
     width: 80px;
     height: 50px;
     justify-self: center;
@@ -48,16 +55,22 @@ body {
     border-radius: 12px;
 }
 
-.playerNameDivas {
-    font-style: italic;
-    min-width: 100px;
+input:focus {
+    outline:none;
+}
+
+.playerNameDiv {
     width: fit-content;
-    background-color: white;
     padding-right: 10px;
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 4px;
+}
+
+#playerNames {
+    grid-area: 2 / 1 / 3 / 2;
+    padding-left: 100px;
 }
 
 .pencilIcon {
@@ -67,10 +80,8 @@ body {
 }
 
 .playerNameBox {
-   font-style: italic;
-    min-width: 100px;
-    width: fit-content;
-    background-color: white;
+    font-style: italic;
+    background-color: rgb(255, 255, 255);
     padding-right: 10px;
     padding-left: 10px;
     padding-top: 5px;
