@@ -124,8 +124,8 @@ function gameflow() {
     ||  (board[0][2] === board[1][2] && board[0][2] === board[2][2] && !(board[0][2] === 0))
     ||  (board[0][0] === board[1][1] && board[0][0] === board[2][2] && !(board[0][0] === 0))
     ||  (board[0][2] === board[1][1] && board[0][2] === board[2][0] && !(board[0][2] === 0))) {
-            if (playerTurn === 1) {winAlert.innerHTML = playerOneCurrentName + " Wins", controller.abort()}
-                else{winAlert.innerHTML = playerTwoCurrentName + " Wins", controller.abort()}
+            if (playerTurn === 1) {winAlert.innerHTML = playerOneCurrentName + " (" + players()[0].marker + ")" + " Wins", controller.abort()}
+                else{winAlert.innerHTML = playerTwoCurrentName + " (" + players()[1].marker + ")" + " Wins", controller.abort()}
             
             }
     else if (filteredArray.length === 0) {
@@ -160,7 +160,7 @@ function gameflow() {
         if (i <= 2) {
             const cellIdentifier = {row: "0" , column: i}; return cellIdentifier}
         else if (i <= 5) {
-        const cellIdentifier = {row: "1" , column: i - 3}; return cellIdentifier}
+            const cellIdentifier = {row: "1" , column: i - 3}; return cellIdentifier}
         else if(i <= 8) {
             const cellIdentifier = {row: "2" , column: i - 6}; return cellIdentifier}
     }
