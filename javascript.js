@@ -23,13 +23,19 @@ function Gameboard() {
 
 
 function players() {
+    const playerOneName = document.getElementById("playerOneName");
+    const playerTwoName = document.getElementById("playerTwoName");
     function newPlayer(name, marker) {
-        const playerObject = {name, marker}
+        const playerObject = { name , marker}
         return playerObject
     }
 
-    const player1 = newPlayer("jim", "X");
-    const player2 = newPlayer("jill", "O");
+    const player1 = newPlayer( playerOneName.innerHTML , "X");
+    const player2 = newPlayer( playerTwoName.innerHTML, "O");
+
+    playerOneName.addEventListener('change', () => player1.name = playerOneName.innerHTML)
+    playerTwoName.addEventListener('change', () => player2.name = playerTwoName.innerHTML)
+
     return [player1, player2]
 };
 
@@ -80,6 +86,8 @@ function gameflow() {
         let board = currentBoard;
         let mergedBoardArray = currentBoard[0].concat(currentBoard[1],currentBoard[2]);
         let filteredArray = mergedBoardArray.filter(filterMarked);
+        let playerOneCurrentName  = players()[0].name;
+        let playerTwoCurrentName = players()[1].name;
     if(
         (board[0][0] === board[0][1] && board[0][0] === board[0][2] && !(board[0][0] === 0))
     ||  (board[1][0] === board[1][1] && board[1][0] === board[1][2] && !(board[1][0] === 0))
@@ -89,19 +97,19 @@ function gameflow() {
     ||  (board[0][2] === board[1][2] && board[0][2] === board[2][2] && !(board[0][2] === 0))
     ||  (board[0][0] === board[1][1] && board[0][0] === board[2][2] && !(board[0][0] === 0))
     ||  (board[0][2] === board[1][1] && board[0][2] === board[2][0] && !(board[0][2] === 0))) {
-            if (playerTurn === 1) {winAlert.innerHTML = "Player 1 Wins", controller.abort()}
-                else{winAlert.innerHTML = "Player 2 Wins", controller.abort()}
+            if (playerTurn === 1) {winAlert.innerHTML = playerOneCurrentName + " Wins", controller.abort()}
+                else{winAlert.innerHTML = playerTwoCurrentName + " Wins", controller.abort()}
             
             }
     else if (filteredArray.length === 0) {
-        winAlert.innerHTML = "Tie";
+        winAlert.innerHTML = "Tie", controller.abort();
     }
         } 
 
     function addClickEvents() {
         restartButton.addEventListener('click', () => {
             clearBoard();
-            controller = new AbortController;
+            controller = new AbortController();
             boardClickEvents();
             winAlert.innerHTML = "";
         })
