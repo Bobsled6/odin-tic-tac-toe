@@ -25,9 +25,24 @@ function Gameboard() {
 function players() {
     const playerOneName = document.getElementById("playerOneName");
     const playerTwoName = document.getElementById("playerTwoName");
+    const playerNameTextBox = document.querySelectorAll(".playerNameBox");
+    
+    playerNameTextBox.forEach(function(element) {
+        element.addEventListener('keydown', function(event) {
+          if(event.key === "Enter") {
+            event.preventDefault();
+            element.blur();
+          };
+        })
+        element.addEventListener('blur', function() {
+            element.innerHTML = element.innerHTML.replace(/\&nbsp;/g, '')
+            element.innerHTML = element.innerHTML.trim();
+        })
+    }) 
+
     function newPlayer(name, marker) {
         const playerObject = { name , marker}
-        return playerObject
+        return playerObject;
     }
 
     const player1 = newPlayer( playerOneName.innerHTML , "X");
@@ -107,6 +122,7 @@ function gameflow() {
         } 
 
     function addClickEvents() {
+        
         restartButton.addEventListener('click', () => {
             clearBoard();
             controller = new AbortController();
@@ -138,6 +154,7 @@ function gameflow() {
     }
 
     function clearBoard() {
+        controller.abort();
         for(let i = 0; i < boardSpace.length; i++) {
             boardSpace[i].innerHTML = "";
         }
