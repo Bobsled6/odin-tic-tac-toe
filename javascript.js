@@ -28,14 +28,14 @@ function players() {
     const playerNameTextBox = document.querySelectorAll(".playerNameBox");
 
     playerOneName.addEventListener('blur', () => {
-        if (playerOneName.innerHTML === "") {
-            playerOneName.innerHTML = "Player 1";
+        if (playerOneName.value === "") {
+            playerOneName.value = "Player 1";
         } 
     });
 
    playerTwoName.addEventListener('blur', () => {
-        if (playerTwoName.innerHTML === "") {
-            playerTwoName.innerHTML = "Player 2";
+        if (playerTwoName.value === "") {
+            playerTwoName.value = "Player 2";
         } 
     });
     
@@ -47,8 +47,8 @@ function players() {
           };
         })
         element.addEventListener('blur', function() {
-            element.innerHTML = element.innerHTML.replace(/\&nbsp;/g, '')
-            element.innerHTML = element.innerHTML.trim();
+            element.value = element.value.replace(/\&nbsp;/g, '')
+            element.value = element.value.trim();
         })
     }) 
 
@@ -57,11 +57,11 @@ function players() {
         return playerObject;
     }
 
-    const player1 = newPlayer( playerOneName.innerHTML , "X");
-    const player2 = newPlayer( playerTwoName.innerHTML, "O");
+    const player1 = newPlayer( playerOneName.value , "X");
+    const player2 = newPlayer( playerTwoName.value, "O");
 
-    playerOneName.addEventListener('change', () => player1.name = playerOneName.innerHTML)
-    playerTwoName.addEventListener('change', () => player2.name = playerTwoName.innerHTML)
+    playerOneName.addEventListener('change', () => player1.name = playerOneName.value)
+    playerTwoName.addEventListener('change', () => player2.name = playerTwoName.value)
 
     return [player1, player2]
 };
