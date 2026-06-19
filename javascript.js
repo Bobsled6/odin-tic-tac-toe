@@ -26,6 +26,18 @@ function players() {
     const playerOneName = document.getElementById("playerOneName");
     const playerTwoName = document.getElementById("playerTwoName");
     const playerNameTextBox = document.querySelectorAll(".playerNameBox");
+
+    playerOneName.addEventListener('blur', () => {
+        if (playerOneName.innerHTML === "") {
+            playerOneName.innerHTML = "Player 1";
+        } 
+    });
+
+   playerTwoName.addEventListener('blur', () => {
+        if (playerTwoName.innerHTML === "") {
+            playerTwoName.innerHTML = "Player 2";
+        } 
+    });
     
     playerNameTextBox.forEach(function(element) {
         element.addEventListener('keydown', function(event) {
