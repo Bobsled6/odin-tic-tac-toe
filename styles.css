@@ -66,6 +66,19 @@ body {
     align-items: center;
 }
 
+button {
+    width: 100px;
+    height: 40px;
+    justify-self: center;
+    align-self: end;
+    background-color: rgb(255, 255, 255);
+    border-radius: 12px;
+    margin-bottom: 40px;
+}
+
+#resetScore {
+    margin-top: 20px;
+}
 
 #restartButton {
     grid-area: 3 / 2 / 4 / 3;

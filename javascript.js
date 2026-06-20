@@ -102,13 +102,13 @@ function gameflow() {
         turnCheck();
         if (playerTurn === 1) {
             currentBoard[row][column] = player1Marker;
-            xMarker.setAttribute('style', 'color: blue');
-            oMarker.setAttribute('style', 'color: white');
+            xMarker.setAttribute('style', 'color: white');
+            oMarker.setAttribute('style', 'color: red');
         }
         else if(playerTurn === 2) {
             currentBoard[row][column] = player2Marker;
-            oMarker.setAttribute('style', 'color: red');
-            xMarker.setAttribute('style', 'color: white');
+            oMarker.setAttribute('style', 'color: white');
+            xMarker.setAttribute('style', 'color: blue');
         }
         winCheck();
         turnCheck();
@@ -124,6 +124,7 @@ function gameflow() {
         let playerTwoCurrentName = players()[1].name;
         const playerOneScore = document.getElementById("playerOneScoreCount");
         const playerTwoScore = document.getElementById("playerTwoScoreCount");
+        const resetScore = document.getElementById("resetScore");
         let currentPlayerOneScore = parseInt(playerOneScore.innerHTML);
         let currentPlayerTwoScore = parseInt(playerTwoScore.innerHTML);
     if(
@@ -155,11 +156,18 @@ function gameflow() {
                 controller.abort()}
             
             }
-    else if (filteredArray.length === 0) {
-        xMarker.setAttribute('style', 'color: blue'),
-        oMarker.setAttribute('style', 'color: red'),
-        winner.innerHTML = "Tie", controller.abort();
+            else if (filteredArray.length === 0) {
+                xMarker.setAttribute('style', 'color: blue'),
+                oMarker.setAttribute('style', 'color: red'),
+                winner.innerHTML = "Tie", controller.abort();
     }
+
+    resetScore.addEventListener('click', () => {
+        currentPlayerOneScore = 0;
+        currentPlayerTwoScore = 0;
+        playerOneScore.innerHTML = currentPlayerOneScore;
+        playerTwoScore.innerHTML = currentPlayerTwoScore;
+    })
         } 
 
     function addClickEvents() {
@@ -197,8 +205,8 @@ function gameflow() {
 
     function clearBoard() {
         controller.abort();
-        xMarker.setAttribute('style', 'color:blue')
-        oMarker.setAttribute('style', 'color:white')
+        xMarker.setAttribute('style', 'color:blue');
+        oMarker.setAttribute('style', 'color:white');
         for(let i = 0; i < boardSpace.length; i++) {
             boardSpace[i].innerHTML = "";
         }
