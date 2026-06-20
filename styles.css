@@ -122,3 +122,7 @@ input:focus {
 input {
   font-family: inherit;
 }
+
+#xMarker {
+    color:blue;
+}

@@ -69,6 +69,8 @@ function players() {
 function gameflow() {
      const player1Marker = players()[0].marker;
      const player2Marker = players()[1].marker;
+     const oMarker = document.getElementById("oMarker");
+     const xMarker = document.getElementById("xMarker");
      let currentBoard = Gameboard();
      let mergedBoardArray = [];
      const boardSpace = document.querySelectorAll(".cell");
@@ -76,6 +78,7 @@ function gameflow() {
      const winAlert = document.getElementById("winAlert");
      let controller = new AbortController();
      addClickEvents();
+     turnCheck();
 
 
     function filterMarked(cell) {
@@ -99,9 +102,13 @@ function gameflow() {
         turnCheck();
         if (playerTurn === 1) {
             currentBoard[row][column] = player1Marker;
+            xMarker.setAttribute('style', 'color: blue');
+            oMarker.setAttribute('style', 'color: white');
         }
         else if(playerTurn === 2) {
             currentBoard[row][column] = player2Marker;
+            oMarker.setAttribute('style', 'color: red');
+            xMarker.setAttribute('style', 'color: white');
         }
         winCheck();
         turnCheck();
@@ -116,20 +123,34 @@ function gameflow() {
         let playerOneCurrentName  = players()[0].name;
         let playerTwoCurrentName = players()[1].name;
     if(
-        (board[0][0] === board[0][1] && board[0][0] === board[0][2] && !(board[0][0] === 0))
-    ||  (board[1][0] === board[1][1] && board[1][0] === board[1][2] && !(board[1][0] === 0))
-    ||  (board[2][0] === board[2][1] && board[2][0] === board[2][2] && !(board[2][0] === 0))
-    ||  (board[0][0] === board[1][0] && board[0][0] === board[2][0] && !(board[0][0] === 0))
-    ||  (board[0][1] === board[1][1] && board[0][1] === board[2][1] && !(board[0][1] === 0))
-    ||  (board[0][2] === board[1][2] && board[0][2] === board[2][2] && !(board[0][2] === 0))
-    ||  (board[0][0] === board[1][1] && board[0][0] === board[2][2] && !(board[0][0] === 0))
-    ||  (board[0][2] === board[1][1] && board[0][2] === board[2][0] && !(board[0][2] === 0))) {
-            if (playerTurn === 1) {winner.innerHTML = "Winner!", winnerName.innerHTML = playerOneCurrentName + " (" + players()[0].marker + ")", controller.abort()}
-                else{winner.innerHTML = "Winner!", winnerName.innerHTML = playerTwoCurrentName + " (" + players()[1].marker + ")", controller.abort()}
+            (board[0][0] === board[0][1] && board[0][0] === board[0][2] && !(board[0][0] === 0))
+        ||  (board[1][0] === board[1][1] && board[1][0] === board[1][2] && !(board[1][0] === 0))
+        ||  (board[2][0] === board[2][1] && board[2][0] === board[2][2] && !(board[2][0] === 0))
+        ||  (board[0][0] === board[1][0] && board[0][0] === board[2][0] && !(board[0][0] === 0))
+        ||  (board[0][1] === board[1][1] && board[0][1] === board[2][1] && !(board[0][1] === 0))
+        ||  (board[0][2] === board[1][2] && board[0][2] === board[2][2] && !(board[0][2] === 0))
+        ||  (board[0][0] === board[1][1] && board[0][0] === board[2][2] && !(board[0][0] === 0))
+        ||  (board[0][2] === board[1][1] && board[0][2] === board[2][0] && !(board[0][2] === 0))) {
+            if (playerTurn === 1) {
+                winner.innerHTML = "Winner!", 
+                winnerName.innerHTML = playerOneCurrentName + " (" + players()[0].marker + ")",
+                winnerName.setAttribute('style', 'color: blue'),
+                xMarker.setAttribute('style', 'color: blue');
+                oMarker.setAttribute('style', 'color: red');
+                controller.abort()}
+            else{
+                winner.innerHTML = "Winner!",
+                winnerName.innerHTML = playerTwoCurrentName + " (" + players()[1].marker + ")",
+                winnerName.setAttribute('style', 'color: red'),
+                xMarker.setAttribute('style', 'color:blue'),
+                oMarker.setAttribute('style', 'color:red'),
+                controller.abort()}
             
             }
     else if (filteredArray.length === 0) {
-        winnerName.innerHTML = "Tie", controller.abort();
+        xMarker.setAttribute('style', 'color: blue'),
+        oMarker.setAttribute('style', 'color: red'),
+        winner.innerHTML = "Tie", controller.abort();
     }
         } 
 
@@ -151,9 +172,9 @@ function gameflow() {
             boardSpace[i].addEventListener('click', () => {
                 if (boardSpace[i].innerHTML === "") {
                     if(turnCheck() === 1) {
-                        boardSpace[i].innerHTML = "X"}
+                        boardSpace[i].innerHTML = "X", boardSpace[i].setAttribute('style', 'color:blue')}
                     else if (turnCheck() === 2){
-                        boardSpace[i].innerHTML = "O"}
+                        boardSpace[i].innerHTML = "O", boardSpace[i].setAttribute('style', 'color: red')}
                 markCell(idCell(number).row , idCell(number).column);
             }}, {signal: controller.signal})}}}
 
@@ -168,6 +189,8 @@ function gameflow() {
 
     function clearBoard() {
         controller.abort();
+        xMarker.setAttribute('style', 'color:blue')
+        oMarker.setAttribute('style', 'color:white')
         for(let i = 0; i < boardSpace.length; i++) {
             boardSpace[i].innerHTML = "";
         }
