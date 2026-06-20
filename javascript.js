@@ -122,6 +122,10 @@ function gameflow() {
         let filteredArray = mergedBoardArray.filter(filterMarked);
         let playerOneCurrentName  = players()[0].name;
         let playerTwoCurrentName = players()[1].name;
+        const playerOneScore = document.getElementById("playerOneScoreCount");
+        const playerTwoScore = document.getElementById("playerTwoScoreCount");
+        let currentPlayerOneScore = parseInt(playerOneScore.innerHTML);
+        let currentPlayerTwoScore = parseInt(playerTwoScore.innerHTML);
     if(
             (board[0][0] === board[0][1] && board[0][0] === board[0][2] && !(board[0][0] === 0))
         ||  (board[1][0] === board[1][1] && board[1][0] === board[1][2] && !(board[1][0] === 0))
@@ -135,8 +139,10 @@ function gameflow() {
                 winner.innerHTML = "Winner!", 
                 winnerName.innerHTML = playerOneCurrentName + " (" + players()[0].marker + ")",
                 winnerName.setAttribute('style', 'color: blue'),
-                xMarker.setAttribute('style', 'color: blue');
-                oMarker.setAttribute('style', 'color: red');
+                xMarker.setAttribute('style', 'color: blue'),
+                oMarker.setAttribute('style', 'color: red'),
+                currentPlayerOneScore++,
+                playerOneScore.innerHTML = currentPlayerOneScore,
                 controller.abort()}
             else{
                 winner.innerHTML = "Winner!",
@@ -144,6 +150,8 @@ function gameflow() {
                 winnerName.setAttribute('style', 'color: red'),
                 xMarker.setAttribute('style', 'color:blue'),
                 oMarker.setAttribute('style', 'color:red'),
+                currentPlayerTwoScore++,
+                playerTwoScore.innerHTML = currentPlayerOneScore,
                 controller.abort()}
             
             }
